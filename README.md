@@ -71,3 +71,4 @@ mkdir tmp
 cd tmp
 Inflation_prediction-run
 ```
+# Inflation_prediction
