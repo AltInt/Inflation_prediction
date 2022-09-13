@@ -3,6 +3,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from model_v2 import load_model
+from model_v2 import prediction
+
+
 
 st.markdown('''
     # Inflation Prediction
@@ -31,16 +35,31 @@ if st.button('Predict!'):
 
 def get_line_chart_data():
 
-    return pd.read_csv('../raw_data/final_df.csv')
+    return pd.read_csv('../data/final_df.csv')
 
 df = get_line_chart_data()
 
-fig, ax = plt.subplots()
+y = df['RPI']
+y_test5 = y[163:164]
+model6 = load_model('../data/final_prediction_graph')
+test_results5 = prediction(model6)
 
-ax.plot(df['RPI'])
 
-st.pyplot(fig)
+
 
 
 
 #st.line_chart(df[['RPI','CPI']])
+
+def plot_pred(y, y_test5, test_results5):
+    fig, ax = plt.subplots()
+    ax.plot(y, label = 'RPI')
+    ax.scatter([y_test5.index], test_results5['test_predictions'], label='prediction')
+    ax.set_title('Inflation Prediciton')
+    ax.legend()
+    fig.show()
+    return fig
+
+
+fig = plot_pred(y, y_test5, test_results5)
+st.pyplot(fig)
