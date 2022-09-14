@@ -3,8 +3,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from model_v2 import load_model
-from model_v2 import prediction
+from model_lstm import load_model
+from model_lstm import prediction
 
 
 
