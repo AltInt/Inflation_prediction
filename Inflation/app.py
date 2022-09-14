@@ -8,6 +8,9 @@ from model_lstm import load_model_lstm, prediction_lstm
 
 
 
+
+
+
 st.markdown('''
     # Inflation Prediction
     ## A time series analysis project
@@ -64,18 +67,32 @@ if st.button('Predict!'):
 
 # def get_line_chart_data():
 
+<<<<<<< HEAD
 #     return pd.read_csv('data/final_df.csv')
+=======
+    return pd.read_csv('data/final_df.csv')
+>>>>>>> 0dedf0f68bd002a60496ec68077f70af19279c0a
 
 
 
 # df = get_line_chart_data().set_index('Date')
 
+<<<<<<< HEAD
 # y = df['RPI']
 # # y1 = df['RPI_YOY']
 # y_test5 = y[163:164]
 # model6 = load_model('data/final_prediction_graph')
 # test_results5 = prediction(model6)
 # test_results5.index = pd.to_datetime(test_results5.index)
+=======
+
+y = df['RPI']
+# y1 = df['RPI_YOY']
+y_test5 = y[163:164]
+model6 = load_model('data/final_prediction_graph')
+test_results5 = prediction(model6)
+test_results5.index = pd.to_datetime(test_results5.index)
+>>>>>>> 0dedf0f68bd002a60496ec68077f70af19279c0a
 
 # #MAKE ACTUAL_DATA = TODAY'S RPI PRINT
 
@@ -83,6 +100,7 @@ if st.button('Predict!'):
 
 # y.index = pd.to_datetime(y.index)
 
+<<<<<<< HEAD
 # def plot_pred(y, y_test5, test_results5):
 #     fig, ax = plt.subplots()
 #     ax.plot(y, label = 'RPI')
@@ -92,6 +110,18 @@ if st.button('Predict!'):
 #     ax.set_ylabel('RPI')
 #     ax.legend()
 #     fig.show()
+=======
+def plot_pred(y, y_test5, test_results5):
+    fig, ax = plt.subplots()
+    ax.plot(y, label = 'RPI')
+    ax.scatter([test_results5.index], test_results5['test_predictions'], label='prediction', color='r')
+    ax.set_title('Inflation Prediction')
+    ax.set_xlabel('Years')
+    ax.set_ylabel('RPI')
+    ax.set_ylim(200,360)
+    ax.legend()
+    fig.show()
+>>>>>>> 0dedf0f68bd002a60496ec68077f70af19279c0a
 
 #     return fig
 

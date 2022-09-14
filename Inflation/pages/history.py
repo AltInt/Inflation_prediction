@@ -4,7 +4,7 @@ import pandas as pd
 
 def get_line_chart_data():
 
-    return pd.read_csv('../data/final_df.csv')
+    return pd.read_csv('data/final_df.csv')
 
 
 
