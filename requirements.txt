@@ -34,5 +34,10 @@ joblib
 memoized-property
 termcolor
 
+# visualisation
+matplotlib
+plotly
+seaborn
+
 # front-end
 streamlit
