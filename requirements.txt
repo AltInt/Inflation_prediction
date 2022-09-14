@@ -9,11 +9,7 @@ numpy
 pandas
 scikit-learn
 xgboost
-<<<<<<< HEAD
-
-=======
 # reminder to add in tf intel version for deployment
->>>>>>> 2a0c4c6619fdfeaaaf6fb68e0a2e15e1176bb86a
 
 # tests/linter
 black
