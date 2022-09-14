@@ -19,14 +19,13 @@ import seaborn as sns
 
 from data import load_data
 
-path = '../data/final_prediction_graph'
-
-def load_model(path):
+def load_model_lstm():
+    path = 'data/final_prediction_graph'
     model = tensorflow.keras.models.load_model(path)
     return model
 
-def prediction(model):
-    path2 = '../data/final_df.csv'
+def prediction_lstm(model):
+    path2 = 'data/final_df.csv'
     df = load_data(path2)
     y=df['RPI']
     X = df.drop(columns = ['RPI', 'CPI', 'RPI YOY'])
@@ -41,7 +40,3 @@ def prediction(model):
     return test_results5
 
 
-# path2 = '../data/final_df.csv'
-# df = load_data(path2)
-
-prediction(load_model(path))
