@@ -37,6 +37,7 @@ def prediction(model):
     test_results5['date'] = y_test5.index
     test_results5['test_predictions'] = [x[0] for x in test_prediction5]
     test_results5.set_index('date', inplace=True)
+
     return test_results5
 
 
