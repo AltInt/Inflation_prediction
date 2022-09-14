@@ -9,8 +9,7 @@ numpy
 pandas
 scikit-learn
 xgboost
-# tensorflow
-tensorflow-macos
+
 
 # tests/linter
 black
@@ -24,7 +23,6 @@ gcsfs
 google-cloud-storage
 mlflow
 s3fs
-
 
 google-cloud-bigquery<3.0.0
 google-cloud-storage
