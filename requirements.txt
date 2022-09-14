@@ -9,7 +9,8 @@ numpy
 pandas
 scikit-learn
 xgboost
-tensorflow
+# tensorflow
+tensorflow-macos
 
 # tests/linter
 black
