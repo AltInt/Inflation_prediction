@@ -8,7 +8,7 @@ import pandas as pd
 def initialize_xgb_model(n_estimators=1000,
                          max_depth = None,
                          verbosity = 2,learning_rate = learning_rate) -> Model:
-g
+
 
     model = xgb.XGBRegressor(n_estimators=n_estimators,
                            max_depth = max_depth,

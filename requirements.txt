@@ -7,7 +7,7 @@ wheel>=0.29
 # data science
 numpy
 pandas
-scikit-learn
+sklearn
 xgboost
 # reminder to add in tf intel version for deployment
 
@@ -17,16 +17,6 @@ coverage
 flake8
 pytest
 yapf
-
-# API
-gcsfs
-google-cloud-storage
-mlflow
-s3fs
-
-# gcp
-google-cloud-bigquery<3.0.0
-google-cloud-storage
 
 # utilities
 six>=1.14
