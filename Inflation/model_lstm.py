@@ -41,7 +41,7 @@ def prediction(model):
     return test_results5
 
 
-# path2 = '../data/final_df.csv'
+# path2 = 'data/final_df.csv'
 # df = load_data(path2)
 
 prediction(load_model(path))
