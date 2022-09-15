@@ -61,7 +61,6 @@ def predict(model_selection):
         prediction_value_1 = (prediction1.iloc[0]/10)*307.4
         prediction_value_2 = (prediction2.iloc[0]/10)*307.4
         prediction = (prediction_value_1+prediction_value_2)/2
-        st.write(prediction)
         results = pd.DataFrame(columns = ['test_predictions', 'test_actual'], index = y_test5.index)
         results['test_predictions'] = prediction
         results['test_actual'] = 345.2
@@ -122,6 +121,12 @@ def plotly_arimax():
 if st.button('Predict!'):
     prediction = predict(model_selection)
     st.markdown('## Prediction made!📈')
+
+    col1, col2, col3 = st.columns(3)
+    # col1.metric('date', prediction.index)
+    col1.metric('prediction', prediction['test_predictions'])
+    col3.metric('truth', prediction['test_actual'])
+
     st.dataframe(prediction.style.format("{:.2f}"))
 
     if model_selection == 'LSTM':
