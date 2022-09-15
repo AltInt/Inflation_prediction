@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -6,10 +5,15 @@ import matplotlib.pyplot as plt
 from Inflation.model_arima import load_model_arima1
 from model_lstm import load_model_lstm, prediction_lstm
 from model_sarimax import load_model_sarimax
+from data import load_data, get_line_chart_data
+import plotly.express as px
+import plotly.graph_objects as go
+
 from data import load_data
 from model_arima import load_model_arima1, load_model_arima2
 import plotly.express as px
 import plotly.graph_objects as go
+
 
 
 st.markdown('''
@@ -64,44 +68,58 @@ def predict(model_selection):
 
     return results
 
-
-
-
 ##TO DO: FORMAT OUTPUT, round pred
 ##Add truth value
 ##Add chart comparing both
 
 
 
-
-def get_line_chart_data():
-
-    return pd.read_csv('data/final_df.csv')
-
 def plotly_lstm():
-
     df = get_line_chart_data().set_index('Date')
     model6 = load_model_lstm()
     y = df['RPI']
-    test_results5 = prediction_lstm(model6)
+    test_results = prediction_lstm(model6)
     # test_results5.index = pd.to_datetime(test_results5.index)
-
-
     fig1 = px.line(y)
-    fig2 = px.scatter(test_results5["test_predictions"], color_continuous_scale='Inferno')
+    fig2 = px.scatter(test_results["test_predictions"], color_discrete_sequence=['red'])
     fig3 = go.Figure(data=fig1.data + fig2.data)
     return fig3
 
+
+def plotly_sarimax():
+    df = get_line_chart_data().set_index('Date')
+    model_sar = load_model_sarimax()
+    y = df['RPI']
+    test_results = prediction
+    fig1 = px.line(y)
+    fig2 = px.scatter(test_results["test_predictions"], color_discrete_sequence=['red'])
+    fig_sar = go.Figure(data=fig1.data + fig2.data)
+    return fig_sar
+
 if st.button('Predict!'):
     prediction = predict(model_selection)
-
     st.markdown('## Prediction made!📈')
     st.dataframe(prediction.style.format("{:.2f}"))
-    st.pyplot(plotly_lstm())
-    # st.write(prediction)
+
+    if model_selection == 'LSTM':
+        fig_lstm = plotly_lstm()
+        st.plotly_chart(fig_lstm)
+
+    elif model_selection == 'SARIMAX':
+        fig_sar = plotly_sarimax()
+        st.plotly_chart(fig_sar)
+
+
+
+
+
+
+
+
 
     st.pyplot(plotly_lstm())
 # st.plotly_chart(plotly_lstm())
+
 
 
 # #MAKE ACTUAL_DATA = TODAY'S RPI PRINT
