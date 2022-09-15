@@ -19,22 +19,12 @@ import seaborn as sns
 
 from data import load_data
 
-<<<<<<< HEAD
 def load_model_lstm():
     path = 'data/final_prediction_graph'
     model = tensorflow.keras.models.load_model(path)
     return model
 
 def prediction_lstm(model):
-=======
-path = 'data/final_prediction_graph'
-
-def load_model(path):
-    model = tensorflow.keras.models.load_model(path)
-    return model
-
-def prediction(model):
->>>>>>> 0dedf0f68bd002a60496ec68077f70af19279c0a
     path2 = 'data/final_df.csv'
     df = load_data(path2)
     y=df['RPI']
@@ -46,14 +36,6 @@ def prediction(model):
     test_results5['date'] = y_test5.index
     test_results5['test_predictions'] = [x[0] for x in test_prediction5]
     test_results5.set_index('date', inplace=True)
+    test_results5['test_predictions'].round(2)
 
     return test_results5
-
-
-<<<<<<< HEAD
-=======
-# path2 = 'data/final_df.csv'
-# df = load_data(path2)
-
-prediction(load_model(path))
->>>>>>> 0dedf0f68bd002a60496ec68077f70af19279c0a

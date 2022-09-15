@@ -9,7 +9,7 @@ numpy
 pandas
 scikit-learn
 xgboost
-
+statsmodels
 
 
 # reminder to add in tf intel version for deployment
@@ -27,10 +27,6 @@ google-cloud-storage
 mlflow
 s3fs
 
-<<<<<<< HEAD
-=======
-# gcp
->>>>>>> e8669c2c94b3718f124a51cdd4dc22f5f1f1766f
 google-cloud-bigquery<3.0.0
 google-cloud-storage
 
