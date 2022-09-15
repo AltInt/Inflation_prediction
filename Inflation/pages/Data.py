@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def get_line_chart_data():
 
@@ -20,3 +21,13 @@ def get_dataframe_data():
 
 df = get_dataframe_data()
 st.write(df)
+
+def corr_matrix():
+    fig, ax = plt.subplots()
+    df =  get_line_chart_data()
+    corr = df.corr()
+    sns.heatmap(corr, ax=ax)
+
+    return fig
+
+st.pyplot(corr_matrix())

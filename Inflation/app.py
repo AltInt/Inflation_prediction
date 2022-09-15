@@ -119,23 +119,43 @@ def plotly_arimax():
 
 
 if st.button('Predict!'):
+    st.balloons()
     prediction = predict(model_selection)
-    st.markdown('## Prediction made!📈')
 
-    col1, col2, col3 = st.columns(3)
-    # col1.metric('date', prediction.index)
-    col1.metric('prediction', prediction['test_predictions'])
-    col3.metric('truth', prediction['test_actual'])
-
-    st.dataframe(prediction.style.format("{:.2f}"))
 
     if model_selection == 'LSTM':
+        st.markdown('## Prediction made!📈')
+
+
+
+        col1, col2, col3 = st.columns(3)
+        col1.metric('Date', prediction.index[0])
+        col2.metric('Prediction', prediction['test_predictions'], "+12.0%")
+        col3.metric('Truth', prediction['test_actual'], "+12.3%")
+
+        # CSS = '''.css-50ug3q {
+        #     font-size: 40px
+        # }'''
+
+
+        # st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
+
+        st.markdown('## ')
+        st.markdown('### Results Dataframe')
+        st.dataframe(prediction.style.format("{:.2f}"))
+
         fig_lstm = plotly_lstm()
         st.plotly_chart(fig_lstm)
+
+
 
     elif model_selection == 'SARIMAX':
         fig_sar = plotly_sarimax()
         st.plotly_chart(fig_sar)
+
+
+
+
 
     elif model_selection == 'ARIMAX':
         fig_ar = plotly_arimax()
