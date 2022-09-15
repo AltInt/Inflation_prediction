@@ -18,4 +18,4 @@ seaborn
 # front-end
 streamlit
 
-Inflation
+Inflation_prediction
