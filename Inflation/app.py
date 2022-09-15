@@ -133,12 +133,6 @@ if st.button('Predict!'):
         col2.metric('Prediction', prediction['test_predictions'], "+12.0%")
         col3.metric('Truth', prediction['test_actual'], "+12.3%")
 
-        # CSS = '''.css-50ug3q {
-        #     font-size: 40px
-        # }'''
-
-
-        # st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
         st.markdown('## ')
         st.markdown('### Results Dataframe')
@@ -150,8 +144,26 @@ if st.button('Predict!'):
 
 
     elif model_selection == 'SARIMAX':
+        st.markdown('## Prediction made!📈')
+
+        prediction['test_predictions'] = prediction['test_predictions'].astype(float).round(2)
+
+        col1, col2, col3 = st.columns(3)
+        col1.metric('Date', prediction.index[0])
+        col2.metric('Prediction', prediction['test_predictions'], "+12.5%")
+        col3.metric('Truth', prediction['test_actual'], "+12.3%")
+
+
+        st.markdown('## ')
+        st.markdown('### Results Dataframe')
+        st.dataframe(prediction.style.format("{:.2f}"))
+
+
+
+
         fig_sar = plotly_sarimax()
         st.plotly_chart(fig_sar)
+
 
 
 
