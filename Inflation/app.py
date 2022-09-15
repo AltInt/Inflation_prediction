@@ -4,7 +4,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from Inflation.model_arima import load_model_arima1
+from model_arima import load_model_arima1
 from model_lstm import load_model_lstm, prediction_lstm
 from model_sarimax import load_model_sarimax
 from data import load_data, get_line_chart_data
