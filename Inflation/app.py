@@ -3,12 +3,13 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from Inflation.model_arima import load_model_arima1
 from model_lstm import load_model_lstm, prediction_lstm
 from model_sarimax import load_model_sarimax
 from data import load_data
+from model_arima import load_model_arima1, load_model_arima2
 import plotly.express as px
 import plotly.graph_objects as go
-
 
 
 st.markdown('''
@@ -16,7 +17,7 @@ st.markdown('''
     ## A time series analysis project
 ''')
 
-list_models = ['LSTM', 'SARIMAX']
+list_models = ['LSTM', 'SARIMAX', 'ARIMAX']
 model_selection = st.selectbox('Select a model', list_models)
 
 @st.cache
@@ -40,9 +41,28 @@ def predict(model_selection):
         results['test_predictions'] = prediction[163]
         results['test_actual'] = 345.2
 
+    elif model_selection == 'ARIMAX':
+        path3 = 'data/final_df.csv'
+        df = load_data(path3)
+        y = df['RPI']
+        y_test5 = y[163:164]
+        model1 = load_model_arima1()
+        model2 = load_model_arima2()
+        #arratst is the exogenous features for 2022-2023
+        arratst = np.array([[343.54180382,  11.04269294, -10.64054131,  58.34667398]])
+        prediction1 = model1.predict(start=61,end=61,exog = arratst,dynamic=True)
+        prediction2 = model2.predict(start=61,end=61,exog = arratst,dynamic=True)
+        prediction_value_1 = (prediction1.iloc[0]/10)*307.4
+        prediction_value_2 = (prediction2.iloc[0]/10)*307.4
+        prediction = (prediction_value_1+prediction_value_2)/2
+        results = pd.DataFrame(columns = ['test_predictions', 'test_actual'], index = y_test5.index)
+        results['test_predictions'] = prediction[163]
+        results['test_actual'] = 345.2
+
+    else:
+        pass
+
     return results
-
-
 
 
 
@@ -50,12 +70,6 @@ def predict(model_selection):
 ##TO DO: FORMAT OUTPUT, round pred
 ##Add truth value
 ##Add chart comparing both
-
-
-
-
-
-
 
 
 
@@ -88,6 +102,8 @@ if st.button('Predict!'):
 
     st.pyplot(plotly_lstm())
 # st.plotly_chart(plotly_lstm())
+
+
 # #MAKE ACTUAL_DATA = TODAY'S RPI PRINT
 
 # #st.line_chart(df[['RPI','CPI']])
