@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from model_lstm import load_model_lstm, prediction_lstm
 from model_sarimax import load_model_sarimax
 from data import load_data
+import plotly.express as px
+import plotly.graph_objects as go
 
 
 
@@ -43,12 +45,7 @@ def predict(model_selection):
 
 
 
-if st.button('Predict!'):
-    prediction = predict(model_selection)
 
-    st.markdown('## Prediction made!📈')
-    st.dataframe(prediction.style.format("{:.2f}"))
-    # st.write(prediction)
 
 ##TO DO: FORMAT OUTPUT, round pred
 ##Add truth value
@@ -63,29 +60,34 @@ if st.button('Predict!'):
 
 
 
+def get_line_chart_data():
+
+    return pd.read_csv('data/final_df.csv')
+
+def plotly_lstm():
+
+    df = get_line_chart_data().set_index('Date')
+    model6 = load_model_lstm()
+    y = df['RPI']
+    test_results5 = prediction_lstm(model6)
+    # test_results5.index = pd.to_datetime(test_results5.index)
 
 
+    fig1 = px.line(y)
+    fig2 = px.scatter(test_results5["test_predictions"], color_continuous_scale='Inferno')
+    fig3 = go.Figure(data=fig1.data + fig2.data)
+    return fig3
 
+if st.button('Predict!'):
+    prediction = predict(model_selection)
 
+    st.markdown('## Prediction made!📈')
+    st.dataframe(prediction.style.format("{:.2f}"))
+    st.pyplot(plotly_lstm())
+    # st.write(prediction)
 
-
-
-
-# def get_line_chart_data():
-
-#     return pd.read_csv('data/final_df.csv')
-
-
-
-# df = get_line_chart_data().set_index('Date')
-
-# y = df['RPI']
-# # y1 = df['RPI_YOY']
-# y_test5 = y[163:164]
-# model6 = load_model('data/final_prediction_graph')
-# test_results5 = prediction(model6)
-# test_results5.index = pd.to_datetime(test_results5.index)
-
+    st.pyplot(plotly_lstm())
+# st.plotly_chart(plotly_lstm())
 # #MAKE ACTUAL_DATA = TODAY'S RPI PRINT
 
 # #st.line_chart(df[['RPI','CPI']])
