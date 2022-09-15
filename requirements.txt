@@ -1,8 +1,9 @@
 # data science
 numpy
-pandas
+pandas==1.4.4
 scikit-learn
 statsmodels
+tensorflow
 
 # API
 gcsfs
