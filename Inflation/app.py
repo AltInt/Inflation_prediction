@@ -26,7 +26,6 @@ st.markdown('''
 list_models = ['LSTM', 'SARIMAX', 'ARIMAX']
 model_selection = st.selectbox('Select a model', list_models)
 
-@st.cache
 def predict(model_selection):
 
     # print is visible in the server output, not in the page
