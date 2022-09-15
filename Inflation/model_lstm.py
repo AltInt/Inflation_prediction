@@ -1,3 +1,4 @@
+from cgi import test
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import *
 from tensorflow.keras.metrics import RootMeanSquaredError
@@ -36,6 +37,7 @@ def prediction_lstm(model):
     test_results5['date'] = y_test5.index
     test_results5['test_predictions'] = [x[0] for x in test_prediction5]
     test_results5.set_index('date', inplace=True)
-    test_results5['test_predictions'].round(2)
-
+    test_results5['test_actual'] = 345.2
+    test_results5['test_predictions'] = test_results5['test_predictions'].astype(float).round(2)
+    test_results5['test_actual'] = test_results5['test_actual'].astype(float).round(2)
     return test_results5

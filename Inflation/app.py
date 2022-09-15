@@ -5,9 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from model_lstm import load_model_lstm, prediction_lstm
 from model_sarimax import load_model_sarimax
-
-
-
+from data import load_data
 
 
 
@@ -30,10 +28,17 @@ def predict(model_selection):
         prediction = prediction_lstm(model)
 
     elif model_selection == 'SARIMAX':
+        path2 = 'data/final_df.csv'
+        df = load_data(path2)
+        y=df['RPI']
+        y_test5 = y[163:164]
         model = load_model_sarimax()
         prediction = model.predict(start = 60)
+        results = pd.DataFrame(columns = ['test_predictions', 'test_actual'], index = y_test5.index)
+        results['test_predictions'] = prediction[163]
+        results['test_actual'] = 345.2
 
-    return prediction
+    return results
 
 
 
@@ -42,7 +47,8 @@ if st.button('Predict!'):
     prediction = predict(model_selection)
 
     st.markdown('## Prediction made!📈')
-    st.write(prediction)
+    st.dataframe(prediction.style.format("{:.2f}"))
+    # st.write(prediction)
 
 ##TO DO: FORMAT OUTPUT, round pred
 ##Add truth value
