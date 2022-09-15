@@ -25,7 +25,7 @@ def predict(model_selection):
 
     if model_selection == 'LSTM':
         model = load_model_lstm()
-        prediction = prediction_lstm(model)
+        results = prediction_lstm(model)
 
     elif model_selection == 'SARIMAX':
         path2 = 'data/final_df.csv'
